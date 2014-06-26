@@ -1,0 +1,52 @@
+---
+name: elasticsearch
+director_uuid: e55134c3-0a63-47be-8409-c9e53e965d5c 
+release:
+  name: elasticsearch
+  version: latest
+
+compilation:
+  workers: 2
+  network: lsn
+  cloud_properties:
+    ram: 2048
+    disk: 4906
+    cpu: 1
+  reuse_compilation_vms: true
+
+update:
+  canaries: 1
+  canary_watch_time: 30000 - 240000
+  update_watch_time: 30000 - 600000
+  max_in_flight: 2
+
+resource_pools:
+ - name: infrastructure1
+   network: lsn
+   size: 2
+   stemcell:
+    name: bosh-warden-boshlite-ubuntu
+    version: latest
+   cloud_properties:
+    ram: 2048
+    disk: 8192
+    cpu: 1
+
+networks:
+- name: lsn
+  type: manual
+  subnets:
+  - cloud_properties:
+      name: random
+    range : 10.244.0.0/19
+    dns:
+    - 8.8.8.8
+jobs: 
+ - name: elasticsearch
+   templates:
+   - name :  elasticsearch
+   instances: 2
+   resource_pool: infrastructure1
+   persistent_disk: 8192
+   networks:
+   - name: lsn

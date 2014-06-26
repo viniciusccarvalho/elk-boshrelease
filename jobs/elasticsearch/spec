@@ -1,0 +1,7 @@
+---
+name: elasticsearch
+templates:
+  elasticsearch_ctl : bin/elasticsearch_ctl 
+packages:
+  - jdk7
+  - elasticsearch
