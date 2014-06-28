@@ -1,9 +1,9 @@
 # abort script on any command that exit with a non zero value
 set -e
 
-  archive="jdk7/openjdk-1.7.0-u60-unofficial-linux-i586-image.zip"
+  archive="jdk7/openjdk-1.7.0.tar.gz"
   echo "Using 64-bit version"
-  mkdir -p ${BOSH_INSTALL_TARGET}/jdk
+  #mkdir -p ${BOSH_INSTALL_TARGET}/jdk
 if [[ -f $archive ]] ; then
   echo "Archive found"
 else
@@ -12,14 +12,14 @@ else
 fi
 
 echo "Extracting archive..."
-unzip $archive
+tar -zxvf $archive
 
 ls -l
 
 JDK_DIR=$(find . -type d -name 'openjdk*' | head -n1)
 
 if [[ -d $JDK_DIR/bin && $? == 0 ]]; then
-  cp -a $JDK_DIR/* ${BOSH_INSTALL_TARGET}/jdk
+  cp -a $JDK_DIR/* ${BOSH_INSTALL_TARGET}
 else
   echo "JVM is not properly packaged."
   exit 1

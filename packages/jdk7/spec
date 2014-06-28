@@ -4,4 +4,4 @@ name: jdk7
 dependencies:
 
 files:
- - jdk7/openjdk-1.7.0-u60-unofficial-linux-i586-image.zip
+ - jdk7/openjdk-1.7.0.tar.gz

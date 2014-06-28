@@ -1,17 +1,15 @@
 ---
 name: elasticsearch
-director_uuid: e55134c3-0a63-47be-8409-c9e53e965d5c 
+director_uuid: b3dda1e1-4066-431f-acf8-510669c4c0b2
 release:
   name: elasticsearch
   version: latest
 
 compilation:
   workers: 2
-  network: lsn
+  network: default
   cloud_properties:
-    ram: 2048
-    disk: 4906
-    cpu: 1
+    instance_type: m1.small
   reuse_compilation_vms: true
 
 update:
@@ -22,32 +20,32 @@ update:
 
 resource_pools:
  - name: infrastructure1
-   network: lsn
+   network: default
    size: 2
    stemcell:
-    name: bosh-warden-boshlite-ubuntu
+    name: bosh-aws-xen-ubuntu-lucid
     version: latest
    cloud_properties:
-    ram: 2048
-    disk: 8192
-    cpu: 1
+    instance_type: m1.medium
 
 networks:
-- name: lsn
-  type: manual
-  subnets:
-  - cloud_properties:
-      name: random
-    range : 10.244.0.0/24
-    reserved: 10.244.0.1 - 10.244.0.30
-    dns:
-    - 8.8.8.8
+- name: floating
+  type: vip
+  cloud_properties: {}
+- name: default
+  type: dynamic
+  cloud_properties:
+    security_groups: ['bosh']
+    subnet: subnet-ef966498
+    region: us-east-1
+    
+    
 jobs: 
  - name: elasticsearch
    templates:
    - name :  elasticsearch
    instances: 2
    resource_pool: infrastructure1
-   persistent_disk: 8192
+   persistent_disk: 20000
    networks:
-   - name: lsn
+   - name: default

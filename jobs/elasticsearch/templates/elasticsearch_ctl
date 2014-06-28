@@ -5,7 +5,7 @@ LOG_DIR=/var/vcap/sys/log/elasticsearch
 PIDFILE=${RUN_DIR}/pid
 BIN_DIR=/var/vcap/packages/elasticsearch/bin
 
-export JAVA_HOME=/var/vcap/packages/jdk
+export JAVA_HOME=/var/vcap/packages/jdk7
 export PATH=$PATH:$JAVA_HOME/bin:$BIN_DIR
 
 #source /var/vcap/packages/common/utils.sh
@@ -15,7 +15,7 @@ case $1 in
     mkdir -p $RUN_DIR 
     mkdir -p $LOG_DIR
     chown -R vcap:vcap $RUN_DIR 
-    chwon -R vcap:vcap $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
 	${BIN_DIR}/elasticsearch  -p $PIDFILE	
 	;;
 	
