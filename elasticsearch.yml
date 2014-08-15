@@ -1,6 +1,6 @@
 ---
 name: elasticsearch
-director_uuid: e55134c3-0a63-47be-8409-c9e53e965d5c 
+director_uuid: 1477c199-4a50-4334-afe7-85e4cc055822 
 release:
   name: elasticsearch
   version: latest
@@ -38,7 +38,7 @@ networks:
   subnets:
   - cloud_properties:
       name: random
-    range : 10.244.0.0/24
+    range : 10.68.27.0/24
     dns:
     - 8.8.8.8
 jobs: 

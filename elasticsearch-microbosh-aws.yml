@@ -1,6 +1,8 @@
 ---
 name: elasticsearch
-director_uuid: b3dda1e1-4066-431f-acf8-510669c4c0b2
+logging: 
+   level: debug
+director_uuid: 1d96c6c8-8d70-4a09-b6cb-dcba916fa5c3
 release:
   name: elasticsearch
   version: latest
@@ -23,10 +25,10 @@ resource_pools:
    network: default
    size: 2
    stemcell:
-    name: bosh-aws-xen-ubuntu-lucid
+    name: bosh-aws-xen-ubuntu-trusty-go_agent
     version: latest
    cloud_properties:
-    instance_type: m1.medium
+    instance_type: m1.small
 
 networks:
 - name: floating
