@@ -35,11 +35,17 @@ networks:
   type: vip
   cloud_properties: {}
 - name: default
-  type: dynamic
-  cloud_properties:
-    security_groups: ['bosh']
-    subnet: subnet-ef966498
-    region: us-east-1
+  type: manual
+  subnets:
+    - range: 10.0.0.0/24
+      dns: 
+       - 10.0.0.6
+      reserved:
+        - 10.0.0.1 - 10.0.0.9
+      cloud_properties:
+        security_groups: ['bosh']
+        subnet: subnet-ef966498
+        region: us-east-1
     
     
 jobs: 
