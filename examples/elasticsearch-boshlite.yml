@@ -1,6 +1,6 @@
 ---
 name: elasticsearch
-director_uuid: e55134c3-0a63-47be-8409-c9e53e965d5c 
+director_uuid: 7e25414d-2dfe-4a71-a28a-d09fd6c853f2 
 release:
   name: elasticsearch
   version: latest
@@ -8,10 +8,7 @@ release:
 compilation:
   workers: 2
   network: lsn
-  cloud_properties:
-    ram: 2048
-    disk: 4906
-    cpu: 1
+  cloud_properties: {}
   reuse_compilation_vms: true
 
 update:
@@ -25,22 +22,34 @@ resource_pools:
    network: lsn
    size: 2
    stemcell:
-    name: bosh-warden-boshlite-ubuntu
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
     version: latest
-   cloud_properties:
-    ram: 2048
-    disk: 8192
-    cpu: 1
+   cloud_properties: {}
 
 networks:
-- name: lsn
-  type: manual
-  subnets:
-  - cloud_properties:
-      name: random
-    range : 10.244.0.0/24
-    dns:
-    - 8.8.8.8
+  - name: lsn
+    subnets:
+      # network with static ip used for web
+      - range: 10.244.8.0/30
+        reserved: [10.244.8.1]
+        static: [10.244.8.2]
+        cloud_properties: {}
+      # networks for dynamic ips (db, workers, compilation vms)
+      - range: 10.244.8.4/30
+        reserved: [10.244.8.5]
+        cloud_properties: {}
+      - range: 10.244.8.8/30
+        reserved: [10.244.8.9]
+        cloud_properties: {}
+      - range: 10.244.8.12/30
+        reserved: [10.244.8.13]
+        cloud_properties: {}
+      - range: 10.244.8.16/30
+        reserved: [10.244.8.17]
+        cloud_properties: {}
+      - range: 10.244.8.20/30
+        reserved: [10.244.8.21]
+        cloud_properties: {}
 jobs: 
  - name: elasticsearch
    templates:

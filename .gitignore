@@ -17,3 +17,7 @@ blobs/*
 .cache
 Gemfile.lock
 .bundle
+stemcells/**
+releases/**/*.tgz
+blobs
+.DS_Store

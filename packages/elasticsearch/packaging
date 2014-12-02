@@ -1,12 +1,14 @@
 # abort script on any command that exits with a non zero value
 set -e
-
+   export JAVA_HOME=/var/vcap/packages/jdk7
+   export PATH=$PATH:$JAVA_HOME/bin:$BIN_DIR
+   
    echo "Extracting elasticsearch"
    pwd
-   tar -zxvf elasticsearch/elasticsearch-1.1.0.tar.gz
+   tar -zxvf elasticsearch/elasticsearch-1.4.1.tar.gz
    
-   ls -l
    #mkdir -p ${BOSH_INSTALL_TARGET}/elasticsearch
-   ELASTICSEARCH_BIN_DIR=`dirname $(find . -type f -name 'elasticsearch' | head -n1)`
-   ELASTICSEARCH_INSTALL_DIR=${ELASTICSEARCH_BIN_DIR%/*}
-   cp -a ${ELASTICSEARCH_INSTALL_DIR}/* ${BOSH_INSTALL_TARGET}
+   ES_BIN_DIR=`dirname $(find . -type f -name 'elasticsearch' | head -n1)`
+   ES_DIR=`dirname $ES_BIN_DIR`
+   #exec $ES_BIN_DIR/plugin --install mobz/elasticsearch-head
+   cp -a ${ES_DIR}/* ${BOSH_INSTALL_TARGET}

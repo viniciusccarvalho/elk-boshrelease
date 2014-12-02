@@ -2,7 +2,7 @@
 name: elasticsearch
 logging: 
    level: debug
-director_uuid: 1d96c6c8-8d70-4a09-b6cb-dcba916fa5c3
+director_uuid: 128d1656-ce3b-40be-bae4-730809a6f222 
 release:
   name: elasticsearch
   version: latest
@@ -51,3 +51,4 @@ jobs:
    persistent_disk: 20000
    networks:
    - name: default
+     default: [dns, gateway]
