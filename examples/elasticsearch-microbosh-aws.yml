@@ -1,3 +1,7 @@
+<%
+aws_access_key='CHANGE ME'
+aws_secret_key='CHANGE ME'
+%>
 ---
 name: elasticsearch
 logging: 
@@ -58,3 +62,10 @@ jobs:
    networks:
    - name: default
      default: [dns, gateway]
+
+
+properties:
+  aws:
+      region: us-east
+      access_key: <%=aws_access_key%>
+      secret_key: <%=aws_secret_key%>    

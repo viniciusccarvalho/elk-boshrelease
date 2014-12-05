@@ -6,9 +6,8 @@ set -e
    echo "Extracting elasticsearch"
    pwd
    tar -zxvf elasticsearch/elasticsearch-1.4.1.tar.gz
-   
-   #mkdir -p ${BOSH_INSTALL_TARGET}/elasticsearch
    ES_BIN_DIR=`dirname $(find . -type f -name 'elasticsearch' | head -n1)`
    ES_DIR=`dirname $ES_BIN_DIR`
-   #exec $ES_BIN_DIR/plugin --install mobz/elasticsearch-head
+   ${ES_DIR}/bin/plugin install mobz/elasticsearch-head
+   ${ES_DIR}/bin/plugin install elasticsearch/elasticsearch-cloud-aws/2.4.1
    cp -a ${ES_DIR}/* ${BOSH_INSTALL_TARGET}

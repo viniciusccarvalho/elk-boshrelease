@@ -1,6 +1,7 @@
 ---
 name: elasticsearch
 templates:
+  elasticsearch.yml.erb : config/elasticsearch.yml
   elasticsearch_ctl : bin/elasticsearch_ctl 
 packages:
   - jdk7

@@ -1,3 +1,4 @@
+
 ---
 name: elasticsearch
 director_uuid: 7e25414d-2dfe-4a71-a28a-d09fd6c853f2 
@@ -7,7 +8,7 @@ release:
 
 compilation:
   workers: 2
-  network: lsn
+  network: default
   cloud_properties: {}
   reuse_compilation_vms: true
 
@@ -19,7 +20,7 @@ update:
 
 resource_pools:
  - name: infrastructure1
-   network: lsn
+   network: default
    size: 2
    stemcell:
     name: bosh-warden-boshlite-ubuntu-trusty-go_agent
@@ -27,7 +28,7 @@ resource_pools:
    cloud_properties: {}
 
 networks:
-  - name: lsn
+  - name: default
     subnets:
       # network with static ip used for web
       - range: 10.244.8.0/30
@@ -54,8 +55,8 @@ jobs:
  - name: elasticsearch
    templates:
    - name :  elasticsearch
-   instances: 2
+   instances: 1
    resource_pool: infrastructure1
    persistent_disk: 8192
    networks:
-   - name: lsn
+   - name: default

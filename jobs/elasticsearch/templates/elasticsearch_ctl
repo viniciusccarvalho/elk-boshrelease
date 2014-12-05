@@ -16,7 +16,7 @@ case $1 in
     mkdir -p $LOG_DIR
     chown -R vcap:vcap $RUN_DIR 
     chown -R vcap:vcap $LOG_DIR
-	${BIN_DIR}/elasticsearch  -p $PIDFILE	
+	${BIN_DIR}/elasticsearch  -p $PIDFILE -Des.es.config=/var/vcap/jobs/elasticsearch/config/elasticsearch.yml	
 	;;
 	
   stop)
