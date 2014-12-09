@@ -146,7 +146,7 @@
 
 # Path to directory where to store index data allocated for this node.
 #
-path.data: /var/vcap/store/elasticsearch/data
+ path.data: /var/vcap/store/elasticsearch/data
 #
 # Can optionally include more than one location, causing data to be striped across
 # the locations (a la RAID 0) on a file level, favouring locations with most free
@@ -205,7 +205,7 @@ path.data: /var/vcap/store/elasticsearch/data
 # Set the address other nodes will use to communicate with this node. If not
 # set, it is automatically derived. It must point to an actual IP address.
 #
-network.publish_host: <%=spec.networks.default.ip%>
+ network.publish_host: <%=spec.networks.default.ip%>
 
 # Set both 'bind_host' and 'publish_host':
 #
@@ -318,7 +318,7 @@ network.publish_host: <%=spec.networks.default.ip%>
 #
 # 1. Disable multicast discovery (enabled by default):
 #
-#discovery.zen.ping.multicast.enabled: false
+# discovery.zen.ping.multicast.enabled: false
 #
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:
@@ -348,6 +348,9 @@ network.publish_host: <%=spec.networks.default.ip%>
 # For more information, see <https://github.com/elasticsearch/elasticsearch-cloud-azure>.
 
 <%if p('aws')%>
+        
+ discovery.zen.ping.multicast.enabled: false        
+
  discovery:
     type: ec2
  cloud:
